@@ -23,6 +23,7 @@ SOFTWARE.
 	input: null,
 	buffer: null,
 	output: null,
+	windiv: null,
 	hiddenTile: -1,
 	won: false,
 	slices: 3,
@@ -51,13 +52,16 @@ SOFTWARE.
 		this.videoY = 0;
 	},
 
-	setVideo: function() {
+	setVideo: function(s, d) {
 		var vids = document.getElementsByTagName('video');
 
 		for (var i = vids.length;i--; ) {
 			if(vids[i].id == "") vids[i].id = 'video'+i;
 			slivid.init(vids[i].id);
 		}
+		
+		this.windiv = document.getElementById(d);
+		this.slices = s;
 	},
 
 	init: function(video_in) {
@@ -66,12 +70,12 @@ SOFTWARE.
 		slivid.input.onclick = null;
 		
 		var buffer_canvas = document.createElement('canvas');
-		buffer_canvas.id = 'video_buffer';		
+		buffer_canvas.id = vids[i].id + '_buffer';		
 		buffer_canvas.style.display = 'none';
 		slivid.buffer = buffer_canvas.getContext('2d');
 		
 		var output_canvas = document.createElement('canvas');
-		output_canvas.id = 'video_out';
+		output_canvas.id = vids[i].id + '_out';
 		output_canvas.style.border = 'solid 1px #999';
 		slivid.output = output_canvas.getContext('2d');
 		
@@ -171,7 +175,7 @@ SOFTWARE.
 		return slivid.won;
 	},
 	updateWins: function() {
-		var winlist = document.getElementById('wins');
+		var winlist = slivid.windiv;
 		winlist.innerHTML = '';
 		for(var w in slivid.wins) {
 			winlist.innerHTML += slivid.wins[w];
@@ -232,8 +236,6 @@ SOFTWARE.
 			posx = e.layerX;
 			posy = e.layerY;
 		}
-		//var canvasX = posx-output_canvas.offsetLeft;
-		//var canvasY = posy-output_canvas.offsetTop;
 		slivid.findTile(posx, posy);
 	}, 
 
@@ -390,4 +392,4 @@ SOFTWARE.
 	dist: function(x1, y1, x2, y2) {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}	
-};slivid.setVideo();})();
+};slivid.setVideo(3, 'wins');})();
