@@ -70,12 +70,12 @@ SOFTWARE.
 		slivid.input.onclick = null;
 		
 		var buffer_canvas = document.createElement('canvas');
-		buffer_canvas.id = vids[i].id + '_buffer';		
+		buffer_canvas.id = video_in + '_buffer';		
 		buffer_canvas.style.display = 'none';
 		slivid.buffer = buffer_canvas.getContext('2d');
 		
 		var output_canvas = document.createElement('canvas');
-		output_canvas.id = vids[i].id + '_out';
+		output_canvas.id = video_in + '_out';
 		output_canvas.style.border = 'solid 1px #999';
 		slivid.output = output_canvas.getContext('2d');
 		
@@ -392,5 +392,4 @@ SOFTWARE.
 	dist: function(x1, y1, x2, y2) {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}	
-
 };slivid.setVideo(3, 'wins');})();
