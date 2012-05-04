@@ -79,7 +79,8 @@ SOFTWARE.
 		output_canvas.style.border = 'solid 1px #999';
 		slivid.output = output_canvas.getContext('2d');
 		
-		slivid.PAINTRECT.height=output_canvas.height=buffer_canvas.height=slivid.input.videoHeight;
+		// the +1 is a weird hack i have yet to figure out.
+		slivid.PAINTRECT.height=output_canvas.height=buffer_canvas.height=slivid.input.videoHeight+1;
 		slivid.PAINTRECT.width=output_canvas.width=buffer_canvas.width=slivid.input.videoWidth;
 		
 		slivid.input.parentNode.insertBefore(buffer_canvas, slivid.input);
